@@ -23,11 +23,6 @@ public class Company extends CustomerMongo {
     }
 
     @Override
-    public String getCompleteName() {
-        return this.getName();
-    }
-
-    @Override
     public String toString(){
         return "{id: " + getId() +
                 ", name: " + getName() +

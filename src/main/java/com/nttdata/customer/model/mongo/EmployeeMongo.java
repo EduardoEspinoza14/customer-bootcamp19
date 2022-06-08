@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Document(collection = "employees")
-public abstract class EmployeeMongo {
+public class EmployeeMongo {
 
     public static String EMPLOYEE_TYPE_1 = "Holder";
     public static String EMPLOYEE_TYPE_2 = "Signer";

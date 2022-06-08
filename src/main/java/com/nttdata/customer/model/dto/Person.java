@@ -21,11 +21,6 @@ public class Person extends CustomerMongo {
     }
 
     @Override
-    public String getCompleteName() {
-        return this.getName() + " " + this.getLast_name();
-    }
-
-    @Override
     public String toString(){
         return "{id: " + getId() +
                 ", name: " + getName() +

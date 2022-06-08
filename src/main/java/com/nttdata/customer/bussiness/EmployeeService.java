@@ -6,7 +6,7 @@ import reactor.core.publisher.Mono;
 
 public interface EmployeeService {
 
-    Flux<EmployeeMongo> getEmployees();
+    Flux<EmployeeMongo> getEmployeesByCompany(String companyId);
 
     Mono<EmployeeMongo> getEmployee(String id);
 

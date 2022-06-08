@@ -5,20 +5,22 @@ import com.nttdata.customer.model.mongo.EmployeeMongo;
 import com.nttdata.customer.repository.EmployeeRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public abstract class EmployeeServiceImpl implements EmployeeService {
+@Service
+@Primary
+public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
 
     @Override
-    public Flux<EmployeeMongo> getEmployees() {
-        return employeeRepository.findAll();
+    public Flux<EmployeeMongo> getEmployeesByCompany(String companyId){
+        return employeeRepository.findByCompanyId(companyId);
     }
-
-    public abstract Flux<EmployeeMongo> getEmployeesByCompany(String companyId);
 
     public Flux<EmployeeMongo> getEmployeesByCompany(String companyId, String type){
         return employeeRepository.findByCompanyIdAndType(companyId, type);
