@@ -6,10 +6,14 @@ import com.nttdata.customer.model.mongo.EmployeeMongo;
 import com.nttdata.customer.repository.CustomerRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public abstract class CustomerServiceImpl implements CustomerService {
+@Service
+@Primary
+public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerRepository customerRepository;

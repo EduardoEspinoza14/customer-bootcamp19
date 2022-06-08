@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
 public class SignerController {
 
-    private final Logger log = LoggerFactory.getLogger(CompanyController.class);
+    private final Logger log = LoggerFactory.getLogger(SignerController.class);
 
     @Autowired
     SignerService service;
