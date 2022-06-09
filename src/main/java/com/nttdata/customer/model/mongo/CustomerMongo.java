@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+//SE REFIERE AL CLIENTE EN GENERAL, QUE PUEDE SER PERSONA O EMPRESA, SE DEFINEN CONSTANTES PARA LA DIFERENCIACION
 @Data
 @Document(collection = "customers")
 public class CustomerMongo {

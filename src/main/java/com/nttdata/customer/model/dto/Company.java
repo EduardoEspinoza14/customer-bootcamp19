@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.List;
 
+//SE REFIERE A LOS CLIENTES QUE SON EMPRESAS, POR TANTO EXTIENDE DE LA CLASE CLIENTE PRINCIPAL
 @Getter
 @Setter
 public class Company extends CustomerMongo {

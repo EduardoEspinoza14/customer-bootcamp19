@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.util.Date;
 
+//SE REFIERE A LOS CLIENTES QUE SON PERSONAS, POR TANTO EXTIENDE DE LA CLASE CLIENTE PRINCIPAL
 @Getter
 @Setter
 public class Person extends CustomerMongo {

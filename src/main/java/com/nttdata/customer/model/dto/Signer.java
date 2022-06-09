@@ -4,6 +4,7 @@ import com.nttdata.customer.model.mongo.EmployeeMongo;
 import lombok.Getter;
 import lombok.Setter;
 
+//SE REFIERE A LOS TRABAJADORES QUE SON FIRMANTES, EXTIENDE DE LA CLASE PRINCIPAL DE EMPLOYEE
 @Getter
 @Setter
 public class Signer extends EmployeeMongo {

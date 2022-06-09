@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+//SE REFIERE A LOS TRABAJADORES O RELACIONADOS QUE PUEDE TENER UN CLIENTE DEL TIPO EMPRESA, QUIENES MANEJAN SUS CUENTAS, PUEDEN SER FIRMANTES O TITULARES
 @Data
 @Document(collection = "employees")
 public class EmployeeMongo {
