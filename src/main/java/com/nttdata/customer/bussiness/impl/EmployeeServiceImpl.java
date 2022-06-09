@@ -32,6 +32,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public Mono<EmployeeMongo> getEmployee(String companyId, String id){
+        return employeeRepository.findByCompanyIdAndId(companyId, id);
+    }
+
+    @Override
     public Mono<EmployeeMongo> insertEmployee(String companyId, EmployeeMongo employee) {
         employee.setCompanyId(companyId);
         return employeeRepository.insert(employee);

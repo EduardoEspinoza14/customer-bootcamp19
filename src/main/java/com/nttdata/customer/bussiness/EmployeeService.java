@@ -10,6 +10,8 @@ public interface EmployeeService {
 
     Mono<EmployeeMongo> getEmployee(String id);
 
+    Mono<EmployeeMongo> getEmployee(String companyId, String id);
+
     Mono<EmployeeMongo> insertEmployee(String companyId, EmployeeMongo employee);
 
     Mono<EmployeeMongo> updateEmployee(String companyId, EmployeeMongo employee, String id);

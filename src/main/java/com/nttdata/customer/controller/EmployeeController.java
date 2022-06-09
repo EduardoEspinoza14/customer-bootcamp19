@@ -1,6 +1,7 @@
 package com.nttdata.customer.controller;
 
 import com.nttdata.customer.bussiness.EmployeeService;
+import com.nttdata.customer.model.dto.Holder;
 import com.nttdata.customer.model.mongo.EmployeeMongo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/employee/{customerId}")
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
 public class EmployeeController {
 
@@ -20,14 +21,14 @@ public class EmployeeController {
     @Autowired
     EmployeeService service;
 
-    @GetMapping(value = "/{employeeId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<EmployeeMongo> getEmployee(@PathVariable String employeeId) {
-        return service.getEmployee(employeeId);
-    }
-
-    @GetMapping(value = "/all/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public Flux<EmployeeMongo> getEmployeeByCompany(@PathVariable String customerId) {
         return service.getEmployeesByCompany(customerId);
+    }
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<EmployeeMongo> getEmployee(@PathVariable String customerId, @PathVariable String id) {
+        return service.getEmployee(customerId, id);
     }
 
 }
