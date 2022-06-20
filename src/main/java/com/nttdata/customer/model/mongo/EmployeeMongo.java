@@ -29,11 +29,11 @@ public class EmployeeMongo {
 
   @Override
   public String toString() {
-    return "{id: " + getId() +
-            ", name: " + getName() +
-            ", lastName: " + getLastName() +
-            ", type: " + getType() +
-            "}";
+    return "{id: " + getId()
+            + ", name: " + getName()
+            + ", lastName: " + getLastName()
+            + ", type: " + getType()
+            + "}";
   }
 
 }
