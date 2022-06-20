@@ -46,7 +46,9 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 
   @Override
-  public Mono<EmployeeMongo> updateEmployee(String companyId, EmployeeMongo employeeMongo, String id) {
+  public Mono<EmployeeMongo> updateEmployee(String companyId,
+                                            EmployeeMongo employeeMongo,
+                                            String id) {
     employeeMongo.setCompanyId(companyId);
     return employeeRepository.findById(id)
             .map(employee -> {

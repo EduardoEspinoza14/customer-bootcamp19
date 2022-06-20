@@ -12,10 +12,10 @@ import reactor.core.publisher.Mono;
 @Repository
 public interface EmployeeRepository extends ReactiveMongoRepository<EmployeeMongo, String> {
 
-  Flux<EmployeeMongo> findByCompanyId(String CompanyId);
+  Flux<EmployeeMongo> findByCompanyId(String companyId);
 
-  Mono<EmployeeMongo> findByCompanyIdAndId(String CompanyId, String id);
+  Mono<EmployeeMongo> findByCompanyIdAndId(String companyId, String id);
 
-  Flux<EmployeeMongo> findByCompanyIdAndType(String CompanyId, String type);
+  Flux<EmployeeMongo> findByCompanyIdAndType(String companyId, String type);
 
 }
