@@ -11,45 +11,48 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ * Class CustomerServiceImpl.
+ */
 @Service
 @Primary
 public class CustomerServiceImpl implements CustomerService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+  @Autowired
+  private CustomerRepository customerRepository;
 
-    @Override
-    public Flux<CustomerMongo> getCustomers() {
-        return customerRepository.findAll();
-    }
+  @Override
+  public Flux<CustomerMongo> getCustomers() {
+    return customerRepository.findAll();
+  }
 
-    public Flux<CustomerMongo> getCustomersByType(String type){
-        return customerRepository.findByType(type);
-    }
+  public Flux<CustomerMongo> getCustomersByType(String type) {
+    return customerRepository.findByType(type);
+  }
 
-    @Override
-    public Mono<CustomerMongo> getCustomer(String id) {
-        return customerRepository.findById(id);
-    }
+  @Override
+  public Mono<CustomerMongo> getCustomer(String id) {
+    return customerRepository.findById(id);
+  }
 
-    @Override
-    public Mono<CustomerMongo> insertCustomer(CustomerMongo customer) {
-        return customerRepository.insert(customer);
-    }
+  @Override
+  public Mono<CustomerMongo> insertCustomer(CustomerMongo customer) {
+    return customerRepository.insert(customer);
+  }
 
-    @Override
-    public Mono<CustomerMongo> updateCustomer(CustomerMongo customer, String id) {
-        return customerRepository.findById(id)
-                .map(c_db -> {
-                    BeanUtils.copyProperties(customer, c_db, "id", "type");
-                    return c_db;
-                })
-                .flatMap(customerRepository::save);
-    }
+  @Override
+  public Mono<CustomerMongo> updateCustomer(CustomerMongo customerMongo, String id) {
+    return customerRepository.findById(id)
+            .map(customer -> {
+              BeanUtils.copyProperties(customerMongo, customer, "id", "type");
+              return customer;
+            })
+            .flatMap(customerRepository::save);
+  }
 
-    @Override
-    public Mono<Void> deleteCustomer(String id) {
-        return customerRepository.findById(id)
-                .flatMap(c->customerRepository.deleteById(c.getId()));
-    }
+  @Override
+  public Mono<Void> deleteCustomer(String id) {
+    return customerRepository.findById(id)
+            .flatMap(c -> customerRepository.deleteById(c.getId()));
+  }
 }

@@ -6,17 +6,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.web.reactive.function.client.WebClient;
 
+/**
+ * Class CustomerApplication.
+ */
 @SpringBootApplication
 @EnableReactiveMongoRepositories
 public class CustomerApplication {
+  @Bean
+  public WebClient.Builder getWebClientBuilder() {
+    return WebClient.builder();
+  }
 
-	@Bean
-	public WebClient.Builder getWebClientBuilder(){
-		return WebClient.builder();
-	}
-
-	public static void main(String[] args) {
-		SpringApplication.run(CustomerApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(CustomerApplication.class, args);
+  }
 
 }

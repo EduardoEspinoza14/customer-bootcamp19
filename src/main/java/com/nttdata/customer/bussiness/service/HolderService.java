@@ -5,12 +5,15 @@ import com.nttdata.customer.model.mongo.EmployeeMongo;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
+/**
+ * Class HolderService.
+ */
 @Service
 public class HolderService extends EmployeeServiceImpl {
 
-    @Override
-    public Flux<EmployeeMongo> getEmployeesByCompany(String companyId) {
-        return getEmployeesByCompany(companyId, EmployeeMongo.EMPLOYEE_TYPE_1);
-    }
+  @Override
+  public Flux<EmployeeMongo> getEmployeesByCompany(String companyId) {
+    return getEmployeesByCompany(companyId, EmployeeMongo.EMPLOYEE_TYPE_1);
+  }
 
 }

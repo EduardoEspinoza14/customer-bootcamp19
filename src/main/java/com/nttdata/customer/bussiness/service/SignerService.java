@@ -6,12 +6,15 @@ import com.nttdata.customer.model.mongo.EmployeeMongo;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
+/**
+ * Class SignerService.
+ */
 @Service
 public class SignerService extends EmployeeServiceImpl {
 
-    @Override
-    public Flux<EmployeeMongo> getEmployeesByCompany(String companyId) {
-        return getEmployeesByCompany(companyId, EmployeeMongo.EMPLOYEE_TYPE_2);
-    }
+  @Override
+  public Flux<EmployeeMongo> getEmployeesByCompany(String companyId) {
+    return getEmployeesByCompany(companyId, EmployeeMongo.EMPLOYEE_TYPE_2);
+  }
 
 }

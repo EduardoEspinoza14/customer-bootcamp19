@@ -6,13 +6,16 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ * Interface EmployeeRepository.
+ */
 @Repository
 public interface EmployeeRepository extends ReactiveMongoRepository<EmployeeMongo, String> {
 
-    Flux<EmployeeMongo> findByCompanyId(String CompanyId);
+  Flux<EmployeeMongo> findByCompanyId(String CompanyId);
 
-    Mono<EmployeeMongo> findByCompanyIdAndId(String CompanyId, String id);
+  Mono<EmployeeMongo> findByCompanyIdAndId(String CompanyId, String id);
 
-    Flux<EmployeeMongo> findByCompanyIdAndType(String CompanyId, String type);
+  Flux<EmployeeMongo> findByCompanyIdAndType(String CompanyId, String type);
 
 }
