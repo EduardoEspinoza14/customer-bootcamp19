@@ -1,6 +1,7 @@
 package com.nttdata.customer.bussiness.impl;
 
 import com.nttdata.customer.bussiness.CustomerService;
+import com.nttdata.customer.configuration.KafkaProducerConfiguration;
 import com.nttdata.customer.model.mongo.CustomerMongo;
 import com.nttdata.customer.model.mongo.EmployeeMongo;
 import com.nttdata.customer.repository.CustomerRepository;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.kafka.sender.SenderOptions;
 
 /**
  * Class CustomerServiceImpl.
@@ -20,6 +22,9 @@ public class CustomerServiceImpl implements CustomerService {
 
   @Autowired
   private CustomerRepository customerRepository;
+
+  @Autowired
+  private SenderOptions<String, CustomerMongo> senderOptions;
 
   @Override
   public Flux<CustomerMongo> getCustomers() {
@@ -37,22 +42,33 @@ public class CustomerServiceImpl implements CustomerService {
 
   @Override
   public Mono<CustomerMongo> insertCustomer(CustomerMongo customer) {
-    return customerRepository.insert(customer);
+    return customerRepository.insert(customer)
+            .doOnSuccess(customerMongo -> KafkaProducerConfiguration
+                    .senderCreate(senderOptions,
+                            KafkaProducerConfiguration.insertRecord(customerMongo))
+                    .subscribe());
   }
 
   @Override
-  public Mono<CustomerMongo> updateCustomer(CustomerMongo customerMongo, String id) {
+  public Mono<CustomerMongo> updateCustomer(CustomerMongo customer, String id) {
     return customerRepository.findById(id)
-            .map(customer -> {
-              BeanUtils.copyProperties(customerMongo, customer, "id", "type");
-              return customer;
+            .map(customerMongo -> {
+              BeanUtils.copyProperties(customer, customerMongo, "id", "type");
+              return customerMongo;
             })
-            .flatMap(customerRepository::save);
+            .flatMap(customerRepository::save)
+            .doOnSuccess(customerMongo -> KafkaProducerConfiguration
+                    .senderCreate(senderOptions,
+                            KafkaProducerConfiguration.updateRecord(customerMongo))
+                    .subscribe());
   }
 
   @Override
   public Mono<Void> deleteCustomer(String id) {
     return customerRepository.findById(id)
-            .flatMap(c -> customerRepository.deleteById(c.getId()));
+            .flatMap(c -> customerRepository.deleteById(c.getId()))
+            .doOnSuccess(voidReturn -> KafkaProducerConfiguration
+                    .senderCreate(senderOptions, KafkaProducerConfiguration.deleteRecord(id))
+                    .subscribe());
   }
 }
