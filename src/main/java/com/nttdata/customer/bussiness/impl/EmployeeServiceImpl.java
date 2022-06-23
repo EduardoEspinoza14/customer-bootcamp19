@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
  * Class EmployeeServiceImpl.
  */
 @Service
-@ConditionalOnProperty(name = "cache.enabled", havingValue = "false")
+@ConditionalOnProperty(name = "cache.enabled", havingValue = "false", matchIfMissing = true)
 public class EmployeeServiceImpl implements EmployeeService {
 
   @Autowired
