@@ -12,6 +12,8 @@ public interface EmployeeService {
   //PARA BUSCAR EMPLEADOS POR EL ID DEL CLIENTE DEL TIPO EMPRESA (COMPANY)
   Flux<EmployeeMongo> getEmployeesByCompany(String companyId);
 
+  Flux<EmployeeMongo> getEmployeesByCompany(String companyId, String type);
+
   //PARA OBTENER UN SOLO EMPLEADO POR SU ID
   Mono<EmployeeMongo> getEmployee(String id);
 

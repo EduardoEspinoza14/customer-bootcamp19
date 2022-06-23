@@ -5,7 +5,7 @@ import com.nttdata.customer.model.mongo.EmployeeMongo;
 import com.nttdata.customer.repository.EmployeeRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
  * Class EmployeeServiceImpl.
  */
 @Service
-@Primary
+@ConditionalOnProperty(name = "cache.enabled", havingValue = "false")
 public class EmployeeServiceImpl implements EmployeeService {
 
   @Autowired
@@ -25,6 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     return employeeRepository.findByCompanyId(companyId);
   }
 
+  @Override
   public Flux<EmployeeMongo> getEmployeesByCompany(String companyId, String type) {
     return employeeRepository.findByCompanyIdAndType(companyId, type);
   }
@@ -63,4 +64,5 @@ public class EmployeeServiceImpl implements EmployeeService {
     return employeeRepository.findById(id)
             .flatMap(e -> employeeRepository.deleteById(e.getId()));
   }
+
 }

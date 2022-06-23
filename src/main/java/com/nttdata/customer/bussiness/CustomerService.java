@@ -12,6 +12,8 @@ public interface CustomerService {
   //PARA OBTENER TODOS LOS CLIENTES DEL BANCO
   Flux<CustomerMongo> getCustomers();
 
+  Flux<CustomerMongo> getCustomersByType(String type);
+
   //PARA OBTENER CLIENTE POR ID
   Mono<CustomerMongo> getCustomer(String id);
 

@@ -3,11 +3,10 @@ package com.nttdata.customer.bussiness.impl;
 import com.nttdata.customer.bussiness.CustomerService;
 import com.nttdata.customer.configuration.KafkaProducerConfiguration;
 import com.nttdata.customer.model.mongo.CustomerMongo;
-import com.nttdata.customer.model.mongo.EmployeeMongo;
 import com.nttdata.customer.repository.CustomerRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -17,7 +16,7 @@ import reactor.kafka.sender.SenderOptions;
  * Class CustomerServiceImpl.
  */
 @Service
-@Primary
+@ConditionalOnProperty(name = "cache.enabled", havingValue = "false")
 public class CustomerServiceImpl implements CustomerService {
 
   @Autowired
@@ -31,6 +30,7 @@ public class CustomerServiceImpl implements CustomerService {
     return customerRepository.findAll();
   }
 
+  @Override
   public Flux<CustomerMongo> getCustomersByType(String type) {
     return customerRepository.findByType(type);
   }
